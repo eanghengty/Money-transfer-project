@@ -1,24 +1,29 @@
-import'package:flutter/material.dart';
 import'package:flutter/cupertino.dart';
 import'package:lottie/lottie.dart';
-import 'package:truemoneyversion2/View/loading_transfer_completed.dart';
-import 'package:truemoneyversion2/View/quick_payment_add.dart';
-import 'package:truemoneyversion2/View/quick_transfer.dart';
-class QuickTransferAdd extends StatefulWidget {
-  const QuickTransferAdd({Key? key}) : super(key: key);
+import'package:flutter/material.dart';
+import'package:truemoneyversion2/View/quick_transfer.dart';
+import'package:truemoneyversion2/View/loading_transfer_success.dart';
+class MakeTransfer extends StatefulWidget {
+  const MakeTransfer({Key? key}) : super(key: key);
 
   @override
-  State<QuickTransferAdd> createState() => _QuickTransferAddState();
+  State<MakeTransfer> createState() => _MakeTransferState();
 }
 
-class _QuickTransferAddState extends State<QuickTransferAdd> {
+class _MakeTransferState extends State<MakeTransfer> {
+  List account_menu=['USD','KH'];
+  String select_value='USD';
+
+  my_form_state(){
+    select_value=account_menu[0];
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Center(
             child: Text(
-              'Add Transfer',
+              'Transfer money',
               style: TextStyle(color: Colors.white),
             ),
           ),
@@ -47,13 +52,28 @@ class _QuickTransferAddState extends State<QuickTransferAdd> {
                   child: Lottie.network('https://assets9.lottiefiles.com/private_files/lf30_24lawrru.json'),
                 ),
                 SizedBox(height:10),
-                Text("Add quick Transfer",
+                Text("Make a Transfer",
                     style:TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600
                     )),
                 SizedBox(
                   height: 16,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                DropdownButtonFormField(
+                  onChanged:(new_value){
+                    setState(() {
+                      select_value=new_value as String;
+                    });},
+                  items: account_menu.map((value_item){
+                    return DropdownMenuItem(child: Text(value_item),value: value_item,);
+                  }).toList(),
+                  decoration: InputDecoration(
+                      labelText: 'Credit Account seletection'
+                  ),
                 ),
                 SizedBox(
                   height: 16,
@@ -70,7 +90,7 @@ class _QuickTransferAddState extends State<QuickTransferAdd> {
                 TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Description',
+                    labelText: 'Amount',
                   ),
                 ),
                 SizedBox(
@@ -92,7 +112,7 @@ class _QuickTransferAddState extends State<QuickTransferAdd> {
                   ),
                   onPressed: () {
                     Navigator.of(context).pushReplacement(CupertinoPageRoute(
-                        builder: (ctx) => const LoadingTransferCompleted()));
+                        builder: (ctx) => const LoadingTransferSuccess()));
                   },
                 ),
               ],

@@ -2,7 +2,7 @@ import'package:flutter/material.dart';
 import'package:flutter/cupertino.dart';
 import 'package:truemoneyversion2/View/home_screen_view.dart';
 import 'package:truemoneyversion2/View/quick_transfer_add.dart';
-
+import'package:truemoneyversion2/View/make_transfer_screen.dart';
 class QuickTransfer extends StatefulWidget {
   const QuickTransfer({Key? key}) : super(key: key);
 
@@ -12,44 +12,50 @@ class QuickTransfer extends StatefulWidget {
 
 class _QuickTransferState extends State<QuickTransfer> {
   Widget user({required String icon, required String text, required String description}){
-    return Container(
+    return InkWell(
+      onTap: (){
+        Navigator.of(context).pushReplacement(
+            CupertinoPageRoute(builder: (ctx) => const MakeTransfer()));
+      },
+      child: Container(
 
-      margin: EdgeInsets.only(bottom: 10),
-      color: Colors.white,
-      padding: EdgeInsets.all(10),
-      child: Row(
-        children: [
-          Container(
+        margin: EdgeInsets.only(bottom: 10),
+        color: Colors.white,
+        padding: EdgeInsets.all(10),
+        child: Row(
+          children: [
+            Container(
 
-            child:Image.asset(icon),
+              child:Image.asset(icon),
 
-            width: 40,
-            height: 40,
-          ),
-          SizedBox(width: 15,),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 150,
+              width: 40,
+              height: 40,
+            ),
+            SizedBox(width: 15,),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 150,
 
-                child: Text(text,
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500
+                  child: Text(text,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 3,),
-              Container(
-                width: 300,
+                SizedBox(height: 3,),
+                Container(
+                  width: 300,
 
-                child: Text(description),
-              )
-            ],
-          )
-        ],
+                  child: Text(description),
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

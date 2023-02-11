@@ -52,6 +52,7 @@ class _MoneyTransferServiceState extends State<MoneyTransferService> {
                       Stack(
                         children: [
                           Container(
+                            padding: EdgeInsets.all(5),
                             height:150,
                             width: double.infinity,
                             child: ClipRRect(
@@ -75,29 +76,32 @@ class _MoneyTransferServiceState extends State<MoneyTransferService> {
                         ],
                       ),
                       SizedBox(height: 10,),
-                      Row(
-                        children: [
-                          Container(
-                            width: 80,
-                            height: 80,
-                            child: CircleAvatar(
-                                radius: 50.0,
-                                backgroundImage: AssetImage('lib/Assets/store_logo/luckystore.png') ),
-                          ),
-                          SizedBox(width: 20,),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Luck Supermaket',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15
-                              ),),
-                              SizedBox(height: 3,),
-                              Text('This offer 15% off when you get in.')
-                            ],
-                          )
-                        ],
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 60,
+                              child: CircleAvatar(
+                                  radius: 50.0,
+                                  backgroundImage: AssetImage('lib/Assets/store_logo/luckystore.png') ),
+                            ),
+                            SizedBox(width: 20,),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Luck Supermaket',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15
+                                ),),
+                                SizedBox(height: 3,),
+                                Text('This offer 15% off when you get in.')
+                              ],
+                            )
+                          ],
+                        ),
                       )
                     ],
 
