@@ -83,7 +83,8 @@ class _PayServicesState extends State<PayServices> {
               children: [
                 feature_service(icon:'lib/Assets/telephone.png',text:'Mobile top-up',
                 description: 'Top up your phone or other phones'),
-                feature_service(icon:'lib/Assets/utilities.png',text:'Utilities', description: 'Pay for electric or bills')
+                feature_service(icon:'lib/Assets/utility.png',text:'Utilities', description: 'Pay for electric or bills'),
+                feature_service(icon:'lib/Assets/education.png',text:'Education', description: 'Pay for school fees')
 
               ],
             ),

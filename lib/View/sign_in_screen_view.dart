@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:truemoneyversion2/View/register_screen_view.dart';
 import'package:truemoneyversion2/View/verify_code_screen.dart';
 import'package:flutter/cupertino.dart';
 class SignInScreen extends StatefulWidget {
@@ -74,7 +75,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                         ),
                         onPressed: () {
-
+                          Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>const RegisterString() ));
                         },
                       ),
                     ],
