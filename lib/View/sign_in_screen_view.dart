@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:truemoneyversion2/View/agent_verification.dart';
 import 'package:truemoneyversion2/View/register_screen_view.dart';
 import'package:truemoneyversion2/View/verify_code_screen.dart';
 import'package:flutter/cupertino.dart';
@@ -76,6 +77,21 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         onPressed: () {
                           Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>const RegisterString() ));
+                        },
+                      ),
+                      SizedBox(height: 16,),
+                      Text('Tap on this "Agent" button to sigin as agent account.'),
+                      SizedBox(height: 16,),
+                      ElevatedButton(
+                        child: Text("Agent", style:
+                        TextStyle(color: Colors.white,)),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.lightBlue,
+                          elevation: 0,
+
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>const AgentVerification() ));
                         },
                       ),
                     ],

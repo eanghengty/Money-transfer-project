@@ -3,20 +3,18 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:truemoneyversion2/View/loading_to_agent_home.dart';
 import 'package:truemoneyversion2/View/process_verification.dart';
 import 'package:truemoneyversion2/View/sign_in_screen_view.dart';
-import 'package:truemoneyversion2/View/home_screen_view.dart';
-import 'package:truemoneyversion2/View/loading_to_home_screen.dart';
-import 'package:truemoneyversion2/View/first_lock.dart';
 
-class VerifyCode extends StatefulWidget {
-  const VerifyCode({Key? key}) : super(key: key);
+class AgentVerification extends StatefulWidget {
+  const AgentVerification({Key? key}) : super(key: key);
 
   @override
-  State<VerifyCode> createState() => _VerifyCodeState();
+  State<AgentVerification> createState() => _AgentVerificationState();
 }
 
-class _VerifyCodeState extends State<VerifyCode> {
+class _AgentVerificationState extends State<AgentVerification> {
   var time = 60;
   var is_load = false;
   @override
@@ -136,7 +134,7 @@ class _VerifyCodeState extends State<VerifyCode> {
                             )),
                         style: ElevatedButton.styleFrom(
                           primary:
-                              time <= 30 ? Colors.lightBlue : Colors.grey[300],
+                          time <= 30 ? Colors.lightBlue : Colors.grey[300],
                           elevation: 0,
                         ),
                         onPressed: () {
@@ -164,7 +162,7 @@ class _VerifyCodeState extends State<VerifyCode> {
                           Navigator.of(context).pushReplacement(
                               CupertinoPageRoute(
                                   builder: (ctx) =>
-                                      const ProcessVerification()));
+                                  const LoadingToAgentHome()));
                         },
                       ),
                     ],
