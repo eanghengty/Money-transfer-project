@@ -30,10 +30,10 @@ class _LoadingToHomeState extends State<LoadingToHome> {
             Container(
               width: 250,
               height: 250,
-              child: Lottie.network('https://assets7.lottiefiles.com/packages/lf20_zb4cwi18.json'),
+              child: Lottie.network('https://assets8.lottiefiles.com/packages/lf20_jzpjbmvd.json'),
             ),
             SizedBox(height: 16,),
-            Text('Processing Authentication')
+            Text('Setting up password...')
           ],
         ),
       )

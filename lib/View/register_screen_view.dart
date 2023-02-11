@@ -121,6 +121,15 @@ class _RegisterStringState extends State<RegisterString> {
                 TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
+                    labelText: 'Job types',
+                  ),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
                     labelText: 'Secret Key',
                   ),
                 ),

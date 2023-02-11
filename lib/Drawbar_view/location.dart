@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import'package:flutter/cupertino.dart';
 import 'package:truemoneyversion2/View/home_screen_view.dart';
+import'package:lottie/lottie.dart';
 class Location extends StatefulWidget {
   const Location({Key? key}) : super(key: key);
 
@@ -32,9 +33,19 @@ class _LocationState extends State<Location> {
           ),
         ),
       body:Center(
-        child: Text(
-          'This feature is not implemented yet.'
-        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 150,
+                height: 150,
+              child: Lottie.network('https://assets3.lottiefiles.com/private_files/lf30_7tjsbbp7.json'),
+            ),
+            SizedBox(height: 16,),
+            Text('This location & agent is not implemented yet',
+            style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16),)
+          ],
+        )
       )
     );
   }

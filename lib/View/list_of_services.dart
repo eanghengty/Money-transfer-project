@@ -1,17 +1,17 @@
 import'package:flutter/material.dart';
 import'package:flutter/cupertino.dart';
-import 'package:truemoneyversion2/View/home_screen_view.dart';
+import'package:lottie/lottie.dart';
 import 'package:truemoneyversion2/View/make_payment_screen.dart';
-import 'package:truemoneyversion2/View/quick_payment_add.dart';
-class QuickPayment extends StatefulWidget {
-  const QuickPayment({Key? key}) : super(key: key);
+import 'package:truemoneyversion2/View/pay_services.dart';
+class ListService extends StatefulWidget {
+  const ListService({Key? key}) : super(key: key);
 
   @override
-  State<QuickPayment> createState() => _QuickPaymentState();
+  State<ListService> createState() => _ListServiceState();
 }
 
-class _QuickPaymentState extends State<QuickPayment> {
-  Widget payment({required String icon, required String text, required String description}){
+class _ListServiceState extends State<ListService> {
+  Widget feature_service({required String icon, required String text, required String description}){
     return InkWell(
       onTap: (){
         Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=> MakePayment()));
@@ -36,7 +36,7 @@ class _QuickPaymentState extends State<QuickPayment> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 150,
+                  width: 180,
 
                   child: Text(text,
                     style: TextStyle(
@@ -61,11 +61,10 @@ class _QuickPaymentState extends State<QuickPayment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         appBar: AppBar(
           title: Center(
             child: Text(
-              'Quick Payment',
+              'Mobile Top-Up',
               style: TextStyle(color: Colors.white),
             ),
           ),
@@ -77,17 +76,9 @@ class _QuickPaymentState extends State<QuickPayment> {
             ),
             onTap: () {
               Navigator.of(context).pushReplacement(
-                  CupertinoPageRoute(builder: (ctx) => const HomeScreen()));
+                  CupertinoPageRoute(builder: (ctx) => const PayServices()));
             },
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){
-            Navigator.of(context).pushReplacement(
-                CupertinoPageRoute(builder: (ctx) => const QuickPaymentAdd()));
-          },
-          child:Icon(Icons.add,color: Colors.white,),
-          backgroundColor: Colors.blue[800],
         ),
         body:SingleChildScrollView(
             child:
@@ -95,15 +86,16 @@ class _QuickPaymentState extends State<QuickPayment> {
               color: Colors.grey[200],
               child: Column(
                 children: [
-                  payment(icon:'lib/Assets/payment.png',text:'Payment A',
-                      description: 'Utilities'),
-                  payment(icon:'lib/Assets/payment.png',text:'Payment B', description: 'Utilities'),
-                  payment(icon:'lib/Assets/payment.png',text:'Payment C', description: 'Education')
+                  feature_service(icon:'lib/Assets/company_logo/smart.png',text:'Smart',
+                      description: ''),
+                  feature_service(icon:'lib/Assets/company_logo/cellcard.png',text:'Cellcard', description: ''),
+                  feature_service(icon:'lib/Assets/company_logo/metfone.png',text:'Metfone', description: '')
 
                 ],
               ),
             )
         )
-    );;
+
+    );
   }
 }

@@ -3,9 +3,11 @@ import 'dart:async';
 import'package:flutter/material.dart';
 import'package:lottie/lottie.dart';
 import'package:flutter/cupertino.dart';
+import 'package:truemoneyversion2/View/process_verification.dart';
 import'package:truemoneyversion2/View/sign_in_screen_view.dart';
 import'package:truemoneyversion2/View/home_screen_view.dart';
 import'package:truemoneyversion2/View/loading_to_home_screen.dart';
+import'package:truemoneyversion2/View/first_lock.dart';
 class VerifyCode extends StatefulWidget {
   const VerifyCode({Key? key}) : super(key: key);
 
@@ -133,7 +135,7 @@ class _VerifyCodeState extends State<VerifyCode> {
 
                       ),
                       onPressed: () {
-                          Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>LoadingToHome()));
+                          Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>const ProcessVerification()));
                       },
                     ),
                   ],

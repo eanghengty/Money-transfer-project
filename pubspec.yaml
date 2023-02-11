@@ -77,6 +77,9 @@ flutter:
     - lib/Assets/user.png
     - lib/Assets/payment.png
     - lib/Assets/store_logo/luckystore.png
+    - lib/Assets/company_logo/cellcard.png
+    - lib/Assets/company_logo/smart.png
+    - lib/Assets/company_logo/metfone.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

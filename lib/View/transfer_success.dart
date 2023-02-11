@@ -26,7 +26,7 @@ class _TransferSuccessState extends State<TransferSuccess> {
               SizedBox(height: 16,),
               Text('Transfer succeed'),
               SizedBox(height: 16,),
-              Text('Tap on this "Register" button to register new account for your starting your money transfer process.',textAlign: TextAlign.center,),
+              Text('Tap on this "Go back" button to return back to home screen.',textAlign: TextAlign.center,),
               SizedBox(height: 16,),
               ElevatedButton(
                 child: Text("Go back", style:

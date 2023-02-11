@@ -8,12 +8,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:truemoneyversion2/Drawbar_view/term_and_condition.dart';
 import 'package:truemoneyversion2/View/money_transfer_service.dart';
 import 'package:truemoneyversion2/View/my_wallet.dart';
+import 'package:truemoneyversion2/View/notification_screen.dart';
 import 'package:truemoneyversion2/View/pay_services.dart';
 import 'package:truemoneyversion2/View/quick_payment.dart';
 import 'package:truemoneyversion2/View/quick_transaction_limit.dart';
 import 'package:truemoneyversion2/View/quick_transfer.dart';
 import 'package:truemoneyversion2/View/transaction_log.dart';
 import'package:truemoneyversion2/View/sign_in_screen_view.dart';
+import'package:truemoneyversion2/View/contact_hotline.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -152,14 +154,24 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           // leading: Icon(Icons.menu_outlined,color: Colors.white,),
           actions: [
-            Icon(
-              Icons.notifications_active_outlined,
-              color: Colors.white,
+            InkWell(
+              onTap: (){
+                Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=> NotificationScreen()));
+              },
+              child: Icon(
+                Icons.notifications_active_outlined,
+                color: Colors.white,
+              ),
             ),
             SizedBox(width: 20),
-            Icon(
-              Icons.phone_in_talk,
-              color: Colors.white,
+            InkWell(
+              onTap: (){
+                Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=> ContactHotline()));
+              },
+              child: Icon(
+                Icons.phone_in_talk,
+                color: Colors.white,
+              ),
             ),
             ElevatedButton(
                 onPressed: () {
@@ -244,13 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         text: 'Agent & location',
                         id: 2),
-                    drawer_feature_tile(
-                        icon_data: Icon(
-                          Icons.check_box,
-                          color: Colors.white,
-                        ),
-                        text: 'project check point',
-                        id: 0),
+
                     drawer_feature_tile(
                         icon_data: Icon(
                           Icons.settings,
