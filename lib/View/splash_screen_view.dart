@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:truemoneyversion2/View/sign_in_screen_view.dart';
+import 'authscreen.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   sign_in() async{
       Future.delayed(Duration(seconds: 10)).then((value){
-        Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>const SignInScreen() ));
+        Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>const authscreen() ));
       });
   }
   @override

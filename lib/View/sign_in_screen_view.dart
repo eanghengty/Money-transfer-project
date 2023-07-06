@@ -1,9 +1,14 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:truemoneyversion2/View/agent_verification.dart';
+import 'package:truemoneyversion2/View/loading_to_home_screen.dart';
 import 'package:truemoneyversion2/View/register_screen_view.dart';
 import'package:truemoneyversion2/View/verify_code_screen.dart';
 import'package:flutter/cupertino.dart';
+
+import 'signupscreen.dart';
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
 
@@ -13,6 +18,35 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   @override
+  final emailcontroller = TextEditingController();
+  final passwordcontroller = TextEditingController();
+  void dipose(){
+    emailcontroller.dispose();
+    passwordcontroller.dispose();
+    dispose();
+  }
+  Future signin() async{
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailcontroller.text.trim(),
+          password: passwordcontroller.text.trim());
+      Navigator.of(context).pushReplacement(
+          CupertinoPageRoute(builder: (ctx) => const LoadingToHome()));
+    } on FirebaseAuthException catch(error) {
+      AwesomeDialog(
+          context: context,
+          dialogType: DialogType.warning,
+          animType: AnimType.topSlide,
+          showCloseIcon: true,
+          title: "Wrong email/password",
+          desc: "please try again!",
+          btnCancelOnPress: () {},
+          btnOkOnPress: () {}
+      ).show();
+    }
+
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title:Text(''),
@@ -32,38 +66,51 @@ class _SignInScreenState extends State<SignInScreen> {
                 SingleChildScrollView(
                   child: Column(
                     children: [
-                      Text('Sign in by phone number', style:
+                      Text('Sign in by email', style:
                       TextStyle(
                         fontSize: 24,
 
                       )),
                       SizedBox(height: 16),
                       TextField(
+                        controller: emailcontroller,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Phone Number',
+                          labelText: 'Email',
                         ),),
                       SizedBox(height: 16,),
                       TextField(
+                        controller: passwordcontroller,
+                        obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Secret Key',
+                          labelText: 'password',
                         ),),
                       SizedBox(height: 16,),
                       Text('Tap on this "done" button to verify the code that send to your number.'),
                       SizedBox(height: 16,),
-                      ElevatedButton(
-                        child: Text("Done", style:
-                        TextStyle(color: Colors.white,)),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.lightBlue,
-                          elevation: 0,
-
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>const VerifyCode() ));
-                        },
-                      ),
+                      GestureDetector(
+                        onTap: signin,
+                        child: Container(
+                            decoration: BoxDecoration(color: Colors.blue),
+                            width: 90,
+                            height: 50,
+                            child: Center(
+                              child: Text("Done", style: TextStyle(color: Colors.white,)),
+                            )
+                        ),),
+                      // ElevatedButton(
+                      //   child: Text("Done", style:
+                      //   TextStyle(color: Colors.white,)),
+                      //   style: ElevatedButton.styleFrom(
+                      //     primary: Colors.lightBlue,
+                      //     elevation: 0,
+                      //
+                      //   ),
+                      //   onPressed: () {
+                      //     Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>const VerifyCode() ));
+                      //   },
+                      // ),
                       SizedBox(height: 16,),
                       Text('Tap on this "Register" button to register new account for your starting your money transfer process.'),
                       SizedBox(height: 16,),
@@ -76,7 +123,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>const RegisterString() ));
+                          Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>const signup()) );
                         },
                       ),
                       SizedBox(height: 16,),
@@ -94,6 +141,23 @@ class _SignInScreenState extends State<SignInScreen> {
                           Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (ctx)=>const AgentVerification() ));
                         },
                       ),
+                      SizedBox(height: 16,),
+                      AnimatedButton(
+                        text:'Press me',
+                        color: Colors.blue,
+                        pressEvent: (){
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.warning,
+                            animType: AnimType.topSlide,
+                            showCloseIcon: true,
+                            title: "Wrong email/password",
+                            desc: "please try again!",
+                            btnCancelOnPress: (){},
+                            btnOkOnPress: (){}
+                          ).show();
+                        },
+                      )
                     ],
                   ),
                 )

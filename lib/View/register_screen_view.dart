@@ -4,6 +4,9 @@ import 'package:truemoneyversion2/View/sign_in_screen_view.dart';
 import 'package:lottie/lottie.dart';
 import'package:file_picker/file_picker.dart';
 import 'package:truemoneyversion2/View/verify_code_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class RegisterString extends StatefulWidget {
   const RegisterString({Key? key}) : super(key: key);
 
@@ -12,6 +15,7 @@ class RegisterString extends StatefulWidget {
 }
 
 class _RegisterStringState extends State<RegisterString> {
+
   List list_item=[
     'Bank','Worker'
   ];
@@ -46,7 +50,68 @@ class _RegisterStringState extends State<RegisterString> {
       print(e);
     }
   }
+  final emailcontroller=TextEditingController();
+  final passwordcontroller=TextEditingController();
+  final confirmedpasswordcontroller=TextEditingController();
+  final fullnamecontroller=TextEditingController();
+  final dateofbirthcontroller=TextEditingController();
+  final jobselectioncontroller=TextEditingController();
+  final phonenumbercontroller=TextEditingController();
+  final usdmoneycontroller=0;
+  final khmoneycontroller=0;
+  final transactioncontroller=0;
+  final accountcreateddate=DateTime.timestamp();
+  final currentuser = FirebaseAuth.instance;
 
+  // Future signup() async{
+  //   if(passwordconfirmed()){
+  //     await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailcontroller.text.trim(), password: passwordcontroller.text.trim());
+  //     adduserdetail(fullnamecontroller.text.trim(), emailcontroller.text.trim(), dateofbirthcontroller.text.trim(),
+  //         jobselectioncontroller.text.trim(), phonenumbercontroller.text.trim());
+  //   }
+  //
+  // }
+
+
+  // Future adduserdetail(String fullname,String email,String dateofbirth,String jobselection, String phonenumber) async{
+  //   await FirebaseFirestore.instance.collection('customer').add({
+  //     'fullname':fullname,
+  //     'email':email,
+  //     'dateofbirth':dateofbirth,
+  //     'jobselection':jobselection,
+  //     'phonenumber':phonenumber
+  //   });
+  // }
+  Future adduserdetail() async{
+    await FirebaseFirestore.instance.collection('customer').add({
+      'fullname':fullnamecontroller.text.trim(),
+      'email':emailcontroller.text.trim(),
+      'dateofbirth':dateofbirthcontroller.text.trim(),
+      'jobselection':jobselectioncontroller.text.trim(),
+      'phonenumber':phonenumbercontroller.text.trim(),
+      'usdmoney':usdmoneycontroller,
+      'khmoney':khmoneycontroller,
+      'uid':currentuser.currentUser!.uid
+    });
+  }
+
+  bool passwordconfirmed(){
+    if(passwordcontroller==confirmedpasswordcontroller){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  void dispose(){
+    emailcontroller.dispose();
+    passwordcontroller.dispose();
+    confirmedpasswordcontroller.dispose();
+    fullnamecontroller.dispose();
+    dateofbirthcontroller.dispose();
+    jobselectioncontroller.dispose();
+    phonenumbercontroller.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +142,7 @@ class _RegisterStringState extends State<RegisterString> {
                     child: Lottie.network(
                         'https://assets6.lottiefiles.com/packages/lf20_wzAk0pBKAp.json')),
                 TextField(
+                  controller: fullnamecontroller,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Full name',
@@ -84,23 +150,37 @@ class _RegisterStringState extends State<RegisterString> {
                 ),
                 SizedBox(
                   height: 16,
-                ),
-                DropdownButtonFormField(
-                  onChanged:(new_value){
-                  setState(() {
-                    select_value=new_value as String;
-                  });},
-                  items: list_item.map((value_item){
-                    return DropdownMenuItem(child: Text(value_item),value: value_item,);
-                  }).toList(),
+                ),TextField(
+                  controller: emailcontroller,
                   decoration: InputDecoration(
-                    labelText: 'Job Selection'
+                    border: OutlineInputBorder(),
+                    labelText: 'email',
+                  ),),
+                SizedBox(height: 16,),
+                // DropdownButtonFormField(
+                //   onChanged:(new_value){
+                //   setState(() {
+                //     select_value=new_value as String;
+                //   });},
+                //   items: list_item.map((value_item){
+                //     return DropdownMenuItem(child: Text(value_item),value: value_item,);
+                //   }).toList(),
+                //   decoration: InputDecoration(
+                //     labelText: 'Job Selection'
+                //   ),
+                // ),
+                TextField(
+                  controller: jobselectioncontroller,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Job title',
                   ),
                 ),
                 SizedBox(
                   height: 16,
                 ),
                 TextField(
+                  controller: phonenumbercontroller,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Phone Number',
@@ -110,6 +190,7 @@ class _RegisterStringState extends State<RegisterString> {
                   height: 16,
                 ),
                 TextField(
+                  controller: dateofbirthcontroller,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Date of birth',
@@ -118,21 +199,24 @@ class _RegisterStringState extends State<RegisterString> {
                 SizedBox(
                   height: 16,
                 ),
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Job types',
-                  ),
-                ),
                 SizedBox(
                   height: 16,
                 ),
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Secret Key',
-                  ),
-                ),
+                // TextField(
+                //   controller: passwordcontroller,
+                //   obscureText: true,
+                //   decoration: InputDecoration(
+                //     border: OutlineInputBorder(),
+                //     labelText: 'password',
+                //   ),),
+                // SizedBox(height: 16,),
+                // TextField(
+                //   controller: confirmedpasswordcontroller,
+                //   obscureText: true,
+                //   decoration: InputDecoration(
+                //     border: OutlineInputBorder(),
+                //     labelText: 'confirm password',
+                //   ),),
                 SizedBox(
                   height: 16,
                 ),
@@ -188,7 +272,7 @@ class _RegisterStringState extends State<RegisterString> {
                   height: 16,
                 ),
                 ElevatedButton(
-                  child: Text("Confirm Register",
+                  child: Text("Confirm information",
                       style: TextStyle(
                         color: Colors.white,
                       )),
@@ -197,12 +281,16 @@ class _RegisterStringState extends State<RegisterString> {
                     elevation: 0,
                   ),
                   onPressed: () {
+                    adduserdetail();
                     Navigator.of(context).pushReplacement(CupertinoPageRoute(
                         builder: (ctx) => const VerifyCode()));
+
                   },
                 ),
+
               ],
             )),
+
       ),
     );
   }

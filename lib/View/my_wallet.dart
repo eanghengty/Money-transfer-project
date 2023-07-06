@@ -1,9 +1,13 @@
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:truemoneyversion2/View/getaccountinfo.dart';
+import 'package:truemoneyversion2/View/getdata.dart';
 import 'package:truemoneyversion2/View/home_screen_view.dart';
 import'package:lottie/lottie.dart';
 import 'package:truemoneyversion2/View/transaction_log.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 class MyWallet extends StatefulWidget {
   const MyWallet({Key? key}) : super(key: key);
 
@@ -12,6 +16,27 @@ class MyWallet extends StatefulWidget {
 }
 
 class _MyWalletState extends State<MyWallet> {
+  List<String> docIDs=['test'];
+  Future getDocId() async{
+    await FirebaseFirestore.instance.collection('customer').where('uid',isEqualTo: FirebaseAuth.instance.currentUser!.uid).get().then(
+            (snapshot)=>snapshot.docs.forEach((document) {
+              print(document.reference);
+          setState(() {
+            docIDs.add(document.reference.id);
+          });
+        })
+    );
+  }
+
+  void dispose(){
+    super.dispose();
+  }
+
+  void initState(){
+    super.initState();
+    getDocId();
+    print(docIDs.length);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,8 +77,12 @@ class _MyWalletState extends State<MyWallet> {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          'Eang Hengty\'s wallet',
+                        // Text(
+                        //   'Eang Hengty\'s wallet',
+                        //   style: TextStyle(color: Colors.white, fontSize: 16),
+                        // ),
+                        docIDs.length==2? getdata(documentid: docIDs[1]):Text(
+                          'Your wallet',
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                         Expanded(child: SizedBox()),
@@ -82,10 +111,10 @@ class _MyWalletState extends State<MyWallet> {
                               SizedBox(
                                 width: 15,
                               ),
-                              Text(
-                                '300.12',
-                                style: TextStyle(fontSize: 16, color: Colors.white),
-                              )
+                              docIDs.length==2? getaccountinfo(documentid: docIDs[1],currency:'usdmoney'):Text(
+                                '00.00',
+                                style: TextStyle(color: Colors.white, fontSize: 16),
+                              ),
                             ],
                           ),
                         )),
@@ -103,10 +132,10 @@ class _MyWalletState extends State<MyWallet> {
                               SizedBox(
                                 width: 15,
                               ),
-                              Text(
-                                '100,000',
-                                style: TextStyle(fontSize: 16, color: Colors.white),
-                              )
+                              docIDs.length==2? getaccountinfo(documentid: docIDs[1],currency:'khmoney'):Text(
+                                '00.00',
+                                style: TextStyle(color: Colors.white, fontSize: 16),
+                              ),
                             ],
                           ),
                         ))
